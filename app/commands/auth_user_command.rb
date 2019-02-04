@@ -1,4 +1,4 @@
-class AuthenticateUserCommand < BaseCommand
+class AuthUserCommand < BaseCommand
   private
 
   attr_reader :email, :password
