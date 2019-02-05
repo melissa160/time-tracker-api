@@ -1,18 +1,20 @@
 module Api::V1
   class UsersController < ApplicationController
     before_action :set_user, only: %i[show update destroy]
-    wrap_parameters :user, include: [:password]
 
     def index
+      authorize! :admin
       @users = User.all
       render json: @users
     end
 
     def show
+      authorize! :employee
       render json: @user
     end
 
     def create
+      authorize! :admin
       @user = User.new(user_params)
       @user.password
 
@@ -24,6 +26,7 @@ module Api::V1
     end
 
     def update
+      authorize! :admin
       if @user.update(user_params_update)
         render json: @user
       else
@@ -32,6 +35,7 @@ module Api::V1
     end
 
     def destroy
+      authorize! :admin
       @user.destroy
       render json: @user
     end
