@@ -1,11 +1,10 @@
 class CreateTimeTrackerEmployees < ActiveRecord::Migration[5.1]
   def change
     create_table :time_tracker_employees do |t|
-      t.string :annotation
+      t.string :type
       t.references :user, foreign_key: true
-      t.column :start_at, :datetime
-      t.column :end_at, :datetime
-      t.integer :duration
+      t.column :tdatetime, :datetime
+      t.string :tag
 
       t.timestamps
     end
