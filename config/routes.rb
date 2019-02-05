@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'auth', controller: :auth, action: :create
       resources :users
+      post 'time-tracker-employees/in', controller: :time_tracker_employees, action: :in
     end
   end
 end

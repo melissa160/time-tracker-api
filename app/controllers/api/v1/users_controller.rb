@@ -16,7 +16,6 @@ module Api::V1
     def create
       authorize! :admin
       @user = User.new(user_params)
-      @user.password
 
       if @user.save
         render json: @user, status: :created, location: api_v1_user_url(@user)

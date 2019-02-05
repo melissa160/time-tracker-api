@@ -32,6 +32,8 @@ Rails.application.configure do
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
+  config.time_zone = 'UTC'
+
   config.i18n.fallbacks = [I18n.default_locale]
 
   # Raises error for missing translations
