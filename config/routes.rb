@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       post 'auth', controller: :auth, action: :create
       resources :users
       post 'time-tracker-employees/in', controller: :time_tracker_employees, action: :in
+      post 'time-tracker-employees/out', controller: :time_tracker_employees, action: :out
     end
   end
 end
