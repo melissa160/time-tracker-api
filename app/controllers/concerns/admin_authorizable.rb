@@ -4,7 +4,7 @@ module AdminAuthorizable
   extend ActiveSupport::Concern
 
   included do
-    rescue_from NotPermittedException, with: -> { render json: { error: 'Not Permitted' }, status: :forbidden }
+    rescue_from NotPermittedException, with: -> { render json: { error: 'Do not have permission to perform this action' }, status: :forbidden }
   end
 
   # :reek:ControlParameter
