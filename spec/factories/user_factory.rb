@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :user do
     email { Faker::Internet.email }
-    password {"ouuhonuhn123eu"}
+    password { Faker::Internet.password }
 
     trait :admin do
       admin { true }
