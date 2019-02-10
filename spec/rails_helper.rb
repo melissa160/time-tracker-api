@@ -37,5 +37,4 @@ RSpec.configure do |config|
       example.run
     end
   end
-  #config.include RequestSpecHelper, type: :request
 end
