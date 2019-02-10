@@ -1,0 +1,397 @@
+{
+	"variables": [],
+	"info": {
+		"name": "runa",
+		"_postman_id": "65340a4e-a882-f157-ddb9-b35deb8bc496",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authenticate Admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.globals.set(\"user_id\", jsonData.user.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{protocol}}://{{host}}/api/v1/auth",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"admin@mail.com\",\n  \"password\": \"admin123\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Authenticate Employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.enviroment.set(\"token\", data.message.token);",
+							"pm.globals.set(\"user_id\", jsonData.user.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{protocol}}://{{host}}/api/v1/auth",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"pepito@mail.com\",\n  \"password\": \"pepito123\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"url": "{{protocol}}://{{host}}/api/v1/users",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJlbWFpbCI6InBlcGl0b0BtYWlsLmNvbSIsImFkbWluIjp0cnVlLCJleHAiOjE1NDk4NjQ3OTV9.cDdR0sCT2yCkQdCrH6F8kMp63wNkmfn0J-47by40k7Y",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Pepito Perez\",\n  \"email\": \"pepito@mail.com\",\n  \"password\": \"pepito123\",\n  \"age\": 28,\n  \"department\": \"sales\",\n  \"address\": \"742 de Evergreen Terrace\",\n  \"admin\": false\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.globals.set(\"user_id\", jsonData.user.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{protocol}}://{{host}}/api/v1/users/5",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Pepito Perez\",\n  \"age\": 29,\n  \"department\": \"tecnology\",\n  \"address\": \"742 de Evergreen Terrace\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.globals.set(\"user_id\", jsonData.user.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{protocol}}://{{host}}/api/v1/users/5",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwiYWRtaW4iOnRydWUsImV4cCI6MTU0OTg1ODU1MX0.-Xh5IcdgVBkofbHhMqSsqmMAUdk1__ELibQnPIoRrb0",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user\": {\n\t\t\"name\":\"Melissa Ramirez\",\n\t\t\"email\":\"melissa.ramirez@liftit.co\",\n\t\t\"phone\":\"+3143037742\",\n\t\t\"terms_acceptance\":true,\n\t\t\"password\":\"test1234\",\n\t\t\"password_confirmation\":\"test1234\",\n\t\t\"num_doc\":\"1144029181\"\n\t}\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Index User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.globals.set(\"user_id\", jsonData.user.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{protocol}}://{{host}}/api/v1/users",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwiYWRtaW4iOnRydWUsImV4cCI6MTU0OTg1ODU1MX0.-Xh5IcdgVBkofbHhMqSsqmMAUdk1__ELibQnPIoRrb0",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"admin121@liftit.co\",\n  \"age\": 19,\n  \"department\": \"teco\",\n  \"address\": \"calle ou n\",\n  \"name\": \"u.uoeuo\",\n  \"admin\": true\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.globals.set(\"user_id\", jsonData.user.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{protocol}}://{{host}}/api/v1/users/6",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwiYWRtaW4iOnRydWUsImV4cCI6MTU0OTg1ODU1MX0.-Xh5IcdgVBkofbHhMqSsqmMAUdk1__ELibQnPIoRrb0",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"admin@liftit.co\",\n  \"password\": \"liftit_2018\",\n  \"age\": 19,\n  \"department\": \"tecnologia\",\n  \"address\": \"calle ou nohun\",\n  \"name\": \"holi\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Time tracker in",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.globals.set(\"user_id\", jsonData.user.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{protocol}}://{{host}}/api/v1/time-tracker-employees/in",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwiYWRtaW4iOnRydWUsImV4cCI6MTU0OTg1ODU1MX0.-Xh5IcdgVBkofbHhMqSsqmMAUdk1__ELibQnPIoRrb0",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"tag\": \"holiday\",\n  \"user_id\": 223\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Time tracker out",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.globals.set(\"user_id\", jsonData.user.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{protocol}}://{{host}}/api/v1/time-tracker-employees/out",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwiYWRtaW4iOnRydWUsImV4cCI6MTU0OTg1ODU1MX0.-Xh5IcdgVBkofbHhMqSsqmMAUdk1__ELibQnPIoRrb0",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"tag\": \"holiday\",\n  \"user_id\": 5\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Time tracker reports by current user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.globals.set(\"user_id\", jsonData.user.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{protocol}}://{{host}}/api/v1/time-tracker-reports/me",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwiYWRtaW4iOnRydWUsImV4cCI6MTU0OTg1ODU1MX0.-Xh5IcdgVBkofbHhMqSsqmMAUdk1__ELibQnPIoRrb0",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"start_at\": \"2019-02-05T00:00:00Z\",\n  \"end_at\": \"2019-02-12T19:34:29Z\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Time tracker reports by user list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.globals.set(\"user_id\", jsonData.user.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{protocol}}://{{host}}/api/v1/time-tracker-reports",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwiYWRtaW4iOnRydWUsImV4cCI6MTU0OTg1ODU1MX0.-Xh5IcdgVBkofbHhMqSsqmMAUdk1__ELibQnPIoRrb0",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"start_at\": \"2019-02-06T00:00:00Z\",\n  \"end_at\": \"2019-02-12T19:34:29Z\",\n  \"user_ids\": [5]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
