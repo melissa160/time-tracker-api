@@ -71,8 +71,8 @@ RSpec.describe 'users controller', type: :request do
       context 'Show user by id' do
         before { get "/api/v1/users/#{user_id}"}
 
-        it 'returns status code 200' do
-          expect(response).to have_http_status(200)
+        it 'returns status code 403' do
+          expect(response).to have_http_status(403)
         end
       end
 

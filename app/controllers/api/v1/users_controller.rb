@@ -9,7 +9,7 @@ module Api::V1
     end
 
     def show
-      authorize! :employee
+      authorize! :admin
       render json: @user
     end
 
@@ -50,7 +50,7 @@ module Api::V1
     end
 
     def user_params_update
-      {name: params[:name], email: params[:email], age: params[:age], address: params[:address], department: params[:department]}
+      {name: params[:name], age: params[:age], address: params[:address], department: params[:department]}
     end
   end
 end
