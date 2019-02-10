@@ -1,4 +1,4 @@
-RSpec.describe 'users API', type: :request do
+RSpec.describe 'users controller', type: :request do
   let!(:users) { create_list(:user, 10) }
   let(:user_id) { users.first.id }
 
